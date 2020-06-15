@@ -1,9 +1,8 @@
 import { takeEvery, put, call, select } from 'redux-saga/effects';
 import { RootState } from '../../store/reducers';
 import { ActionTypeKeys, actionCreators } from './homeReducer';
-import { ActionWithPayload } from '../../store/Action';
-import { services } from '../../api/services';
 import { appActionCreators } from '../../store/reducers/appReducer';
+import { services } from '../../api/services';
 
 export function* getImagesRequest() {
     try {

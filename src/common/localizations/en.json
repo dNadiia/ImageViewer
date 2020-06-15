@@ -1,7 +1,8 @@
 {
     "screen": {
         "splash": "I'm Splash Screen",
-        "home": "Gallery App"
+        "home": "Gallery App",
+        "details": "Details"
     },
     "api_error": {
         "unexpected_error": "Unexpected error",

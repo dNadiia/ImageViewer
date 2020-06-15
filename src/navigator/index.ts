@@ -14,12 +14,12 @@ export {
 } from './transitions';
 
 // const getNavigation = useNavigation;
-// const getNavigationParams = (): any => useRoute().params;
+const getNavigationParams = (): any => useRoute().params;
 // const useFocus = useFocusEffect;
 
 export {
     NavigationContainer as AppContainer,
-    // getNavigationParams,
+    getNavigationParams,
     // getNavigation,
     // useFocus,
 };

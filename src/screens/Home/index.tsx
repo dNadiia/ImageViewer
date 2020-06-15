@@ -2,15 +2,22 @@ import React, { useEffect } from 'react';
 import { FlatList, SafeAreaView, RefreshControl, View } from 'react-native';
 import { connect } from 'react-redux';
 import { RootState } from '../../store/reducers';
+import {
+    navigationActionCreators,
+    NavigationPayload,
+} from '../../store/reducers/navigationReducer';
 import { actionCreators } from './homeReducer';
 import { ViewModel, getViewModel } from './selectors';
 import { ListItem } from './components/ListItem';
 import { colors } from '../../common/themes';
 import { styles } from './styles';
+import { Image } from '../../types';
+import { Routes } from '../../navigator';
 
 type Props = ViewModel & {
     getImages: () => void;
     refreshImages: () => void;
+    navigate: (payload: NavigationPayload) => void;
 };
 
 export const HomeComponent = ({
@@ -31,7 +38,8 @@ export const HomeComponent = ({
         !isLoading && !isRefreshing && rest.refreshImages();
     };
 
-    const onImagePress = () => {};
+    const onImagePress = (item: Image) =>
+        rest.navigate({ name: Routes.Details, params: { imageId: item.id } });
 
     return (
         <View style={styles.container}>
@@ -49,7 +57,7 @@ export const HomeComponent = ({
                 renderItem={({ item }) => (
                     <ListItem
                         imageUrl={item.cropped_picture}
-                        onPress={onImagePress}
+                        onPress={() => onImagePress(item)}
                     />
                 )}
                 contentContainerStyle={styles.container}
@@ -67,6 +75,7 @@ const mapStateToProps = (state: RootState) => getViewModel(state);
 const mapDispatchToProps = {
     getImages: actionCreators.getImagesRequest,
     refreshImages: actionCreators.refreshImagesRequest,
+    navigate: navigationActionCreators.navigate,
 };
 
 export const Home = connect(mapStateToProps, mapDispatchToProps)(HomeComponent);

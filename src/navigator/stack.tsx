@@ -3,11 +3,12 @@ import { connect } from 'react-redux';
 import { createStackNavigator } from '@react-navigation/stack';
 import { RootState } from '../store/reducers';
 import { getViewModel, ViewModel } from './selectors';
+import { Routes } from './routes';
 import { Splash } from '../screens/Splash';
 import { Home } from '../screens/Home';
+import { Details } from '../screens/Details';
 import { localize } from '../common/localizations';
 import { colors } from '../common/themes';
-import { Routes } from './routes';
 
 const Stack = createStackNavigator();
 
@@ -27,6 +28,13 @@ const HomeStack = () => (
             component={Home}
             options={{
                 title: localize('screen.home'),
+            }}
+        />
+        <Stack.Screen
+            name={Routes.Details}
+            component={Details}
+            options={{
+                title: localize('screen.details'),
             }}
         />
     </Stack.Navigator>
