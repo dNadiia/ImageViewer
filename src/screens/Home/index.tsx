@@ -1,10 +1,72 @@
-import React from 'react';
-import { View, Text } from 'react-native';
-import { localize } from '../../common/localizations';
+import React, { useEffect } from 'react';
+import { FlatList, SafeAreaView, RefreshControl, View } from 'react-native';
+import { connect } from 'react-redux';
+import { RootState } from '../../store/reducers';
+import { actionCreators } from './homeReducer';
+import { ViewModel, getViewModel } from './selectors';
+import { ListItem } from './components/ListItem';
+import { colors } from '../../common/themes';
 import { styles } from './styles';
 
-export const Home = () => (
-    <View style={styles.container}>
-        <Text>{localize('screen.home')}</Text>
-    </View>
-);
+type Props = ViewModel & {
+    getImages: () => void;
+    refreshImages: () => void;
+};
+
+export const HomeComponent = ({
+    data,
+    isRefreshing,
+    isLoading,
+    ...rest
+}: Props) => {
+    useEffect(() => {
+        onLoadMore();
+    }, []);
+
+    const onLoadMore = () => {
+        !isLoading && !isRefreshing && rest.getImages();
+    };
+
+    const onRefresh = () => {
+        !isLoading && !isRefreshing && rest.refreshImages();
+    };
+
+    const onImagePress = () => {};
+
+    return (
+        <View style={styles.container}>
+            <FlatList
+                refreshControl={
+                    <RefreshControl
+                        tintColor={colors.white}
+                        refreshing={isRefreshing}
+                        onRefresh={onRefresh}
+                    />
+                }
+                initialNumToRender={20}
+                data={data}
+                numColumns={2}
+                renderItem={({ item }) => (
+                    <ListItem
+                        imageUrl={item.cropped_picture}
+                        onPress={onImagePress}
+                    />
+                )}
+                contentContainerStyle={styles.container}
+                keyExtractor={(item, index) => `${item.id}${index}`}
+                onEndReached={onLoadMore}
+                onEndReachedThreshold={0.4}
+            />
+            <SafeAreaView />
+        </View>
+    );
+};
+
+const mapStateToProps = (state: RootState) => getViewModel(state);
+
+const mapDispatchToProps = {
+    getImages: actionCreators.getImagesRequest,
+    refreshImages: actionCreators.refreshImagesRequest,
+};
+
+export const Home = connect(mapStateToProps, mapDispatchToProps)(HomeComponent);

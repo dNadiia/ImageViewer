@@ -1,7 +1,7 @@
 {
     "screen": {
-        "splash": "Splash",
-        "home": "Home"
+        "splash": "I'm Splash Screen",
+        "home": "Gallery App"
     },
     "api_error": {
         "unexpected_error": "Unexpected error",

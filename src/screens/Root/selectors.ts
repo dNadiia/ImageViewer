@@ -14,7 +14,7 @@ export interface ProgressViewModel {
 export const getPopupViewModel = ({ app }: RootState): PopupViewModel => ({
     errorMessage: app.errorMessage,
     informMessage: app.informMessage,
-    backgroundColor: app.informMessage ? colors.blue : colors.error,
+    backgroundColor: app.informMessage ? colors.brand : colors.error,
 });
 
 export const getProgressViewModel = ({

@@ -5,6 +5,6 @@ import { styles } from './styles';
 
 export const Splash = () => (
     <View style={styles.container}>
-        <Text>{localize('screen.splash')}</Text>
+        <Text style={styles.text}>{localize('screen.splash')}</Text>
     </View>
 );

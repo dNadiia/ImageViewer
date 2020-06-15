@@ -4,5 +4,5 @@ export const colors = {
     black: '#000000',
     gray: '#AFB4C7',
     error: '#F23D67',
-    blue: '#0000FF',
+    brand: '#1C65DD',
 };

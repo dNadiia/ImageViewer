@@ -1,4 +1,4 @@
-import { takeEvery, put, call } from 'redux-saga/effects';
+import { takeEvery, put, call, delay } from 'redux-saga/effects';
 import { appActionCreators, ActionTypeKeys } from '../reducers/appReducer';
 import { getErrorMessage, parseError } from '../../api/errors';
 import { localize } from '../../common/localizations';
@@ -9,6 +9,7 @@ import { services } from '../../api/services';
 export function* appStartSaga() {
     try {
         yield call(initializeToken);
+        yield delay(1000);
         const { data } = yield call(services.auth);
         yield call(saveToken, data.token);
         yield put(appActionCreators.appAuthorize());
