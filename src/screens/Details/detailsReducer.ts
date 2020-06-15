@@ -6,7 +6,7 @@ import { ImageDetails } from '../../types';
 export enum ActionTypeKeys {
     GET_IMAGE_DETAILS_REQUEST = 'GET_IMAGE_DETAILS_REQUEST',
     GET_IMAGE_DETAILS_SUCCESS = 'GET_IMAGE_DETAILS_SUCCESS',
-    GET_IMAGE_DETAILS_FAILED = 'GET_IMAGE_DETAILS_FAILED',
+    CLEAR_IMAGE_DETAILS = 'CLEAR_IMAGE_DETAILS',
 }
 
 // Action Creators
@@ -15,8 +15,8 @@ export const actionCreators = {
         createAction(ActionTypeKeys.GET_IMAGE_DETAILS_REQUEST, imageId),
     getImageDetailsSuccess: (payload: ImageDetails) =>
         createAction(ActionTypeKeys.GET_IMAGE_DETAILS_SUCCESS, payload),
-    getImageDetailsFailed: () =>
-        createAction(ActionTypeKeys.GET_IMAGE_DETAILS_FAILED),
+
+    clearImageDetails: () => createAction(ActionTypeKeys.CLEAR_IMAGE_DETAILS),
 };
 
 export interface State {
@@ -30,6 +30,12 @@ export const detailsReducer: Reducer<State> = (
     action: AnyAction,
 ): State => {
     switch (action.type) {
+        case ActionTypeKeys.CLEAR_IMAGE_DETAILS:
+            return {
+                ...state,
+                data: undefined,
+            };
+
         case ActionTypeKeys.GET_IMAGE_DETAILS_SUCCESS:
             return {
                 ...state,
