@@ -1,0 +1,11 @@
+{
+    "screen": {
+        "splash": "Splash",
+        "home": "Home"
+    },
+    "api_error": {
+        "unexpected_error": "Unexpected error",
+        "something_went_wrong": "Something went wrong",
+        "internal_server_error": "Internal server error"
+    }
+}

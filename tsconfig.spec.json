@@ -1,0 +1,8 @@
+{
+    "extends": "./tsconfig",
+    "compilerOptions": {
+        "rootDir": "./"
+    },
+    "include": ["typings", "src", "__tests__"],
+    "exclude": ["*.tsx"]
+}
